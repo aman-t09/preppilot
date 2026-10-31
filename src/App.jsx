@@ -7,12 +7,14 @@ import Sidebar from './components/Sidebar'
 import DashboardPage from './pages/DashboardPage'
 import TasksPage from './pages/TasksPage'
 import DSAPage from './pages/DSAPage'
+import CompaniesPage from './pages/CompaniesPage'
 import ResourcesPage from './pages/ResourcesPage'
 
 const NAV_ITEMS = [
   { name: 'Dashboard', icon: '🏠' },
   { name: 'Tasks', icon: '📝' },
   { name: 'DSA Tracker', icon: '💻' },
+  { name: 'Companies', icon: '🏢' },
   { name: 'Resources', icon: '📚' },
 ]
 
@@ -20,8 +22,10 @@ function App() {
   const [tasks, setTasks] = useLocalStorage('preppilot-tasks', DEFAULT_TASKS)
   const [history, setHistory] = useLocalStorage('preppilot-history', {})
   const [problems, setProblems] = useLocalStorage('preppilot-dsa', [])
+  const [experiences, setExperiences] = useLocalStorage('preppilot-experiences', [])
   const [activePage, setActivePage] = useState('Dashboard')
-    // First visit: follow the system theme. After that, use the saved choice.
+
+  // First visit: follow the system theme. After that, use the saved choice.
   const [theme, setTheme] = useLocalStorage(
     'preppilot-theme',
     window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
@@ -71,6 +75,12 @@ function App() {
 
   const deleteProblem = (id) => setProblems((prev) => prev.filter((p) => p.id !== id))
 
+  // Company experience actions
+  const addExperience = (data) =>
+    setExperiences((prev) => [{ ...data, id: Date.now(), createdAt: Date.now() }, ...prev])
+
+  const deleteExperience = (id) => setExperiences((prev) => prev.filter((e) => e.id !== id))
+
   // Derived values: calculated from state on every render, never stored.
   const completed = tasksToday.filter((t) => t.done).length
   const percent = tasks.length ? Math.round((completed / tasks.length) * 100) : 0
@@ -80,14 +90,14 @@ function App() {
 
   return (
     <div className="app">
-      <      Sidebar
+      <Sidebar
         items={NAV_ITEMS}
         active={activePage}
         onChange={setActivePage}
         streak={streak}
         theme={theme}
         onToggleTheme={toggleTheme}
-      /> 
+      />
 
       <main className="main">
         {activePage === 'Dashboard' && (
@@ -116,6 +126,13 @@ function App() {
             onAdd={addProblem}
             onStatusChange={changeProblemStatus}
             onDelete={deleteProblem}
+          />
+        )}
+        {activePage === 'Companies' && (
+          <CompaniesPage
+            experiences={experiences}
+            onAdd={addExperience}
+            onDelete={deleteExperience}
           />
         )}
         {activePage === 'Resources' && <ResourcesPage />}

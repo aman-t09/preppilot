@@ -604,3 +604,112 @@
     flex-direction: column;
   }
 }
+/* ============ Company Experiences ============ */
+textarea.input {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.5;
+}
+
+.exp-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.exp-form .full {
+  grid-column: 1 / -1;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.exp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+}
+
+.exp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.exp-card:hover {
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.exp-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.exp-company {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.exp-details {
+  border-top: 1px solid var(--border-soft);
+  padding-top: 12px;
+  font-size: 14px;
+}
+
+.exp-details h4 {
+  margin: 10px 0 4px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--muted);
+}
+
+.exp-details ol,
+.exp-details ul {
+  padding-left: 20px;
+  line-height: 1.6;
+}
+
+.exp-details p {
+  line-height: 1.6;
+}
+
+.exp-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--primary-text);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .exp-form {
+    grid-template-columns: 1fr;
+  }
+  .exp-grid {
+    grid-template-columns: 1fr;
+  }
+}

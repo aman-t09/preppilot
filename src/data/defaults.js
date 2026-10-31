@@ -43,3 +43,10 @@ export const STATUSES = [
   { value: 'in-progress', label: 'In Progress' },
   { value: 'solved', label: 'Solved' },
 ]
+export const OUTCOMES = ['Selected', 'Rejected', 'Waiting']
+
+export const OUTCOME_COLORS = {
+  Selected: '#10b981',
+  Rejected: '#ef4444',
+  Waiting: '#f59e0b',
+}
