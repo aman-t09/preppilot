@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import useLocalStorage from './hooks/useLocalStorage'
-import { DEFAULT_TASKS } from './data/defaults'
+import { DEFAULT_TASKS, SAMPLE_EXPERIENCES } from './data/defaults'
 import { dateKey, lastNDays, calcStreak } from './utils/date'
 import Sidebar from './components/Sidebar'
 import DashboardPage from './pages/DashboardPage'
@@ -80,6 +80,12 @@ function App() {
     setExperiences((prev) => [{ ...data, id: Date.now(), createdAt: Date.now() }, ...prev])
 
   const deleteExperience = (id) => setExperiences((prev) => prev.filter((e) => e.id !== id))
+    // Adds the sample experiences, skipping any that are already there
+  const loadSampleExperiences = () =>
+    setExperiences((prev) => {
+      const existing = new Set(prev.map((e) => e.id))
+      return [...SAMPLE_EXPERIENCES.filter((s) => !existing.has(s.id)), ...prev]
+    })
 
   // Derived values: calculated from state on every render, never stored.
   const completed = tasksToday.filter((t) => t.done).length
@@ -128,11 +134,12 @@ function App() {
             onDelete={deleteProblem}
           />
         )}
-        {activePage === 'Companies' && (
+                {activePage === 'Companies' && (
           <CompaniesPage
             experiences={experiences}
             onAdd={addExperience}
             onDelete={deleteExperience}
+            onLoadSamples={loadSampleExperiences}
           />
         )}
         {activePage === 'Resources' && <ResourcesPage />}

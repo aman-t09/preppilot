@@ -4,7 +4,7 @@ import ExperienceForm from '../components/ExperienceForm'
 import ExperienceCard from '../components/ExperienceCard'
 import { DIFFICULTIES, OUTCOMES } from '../data/defaults'
 
-function CompaniesPage({ experiences, onAdd, onDelete }) {
+function CompaniesPage({ experiences, onAdd, onDelete, onLoadSamples }) {
   const [showForm, setShowForm] = useState(false)
   const [search, setSearch] = useState('')
   const [outcome, setOutcome] = useState('All')
@@ -30,17 +30,22 @@ function CompaniesPage({ experiences, onAdd, onDelete }) {
           <p className="page-subtitle">Record interview rounds, questions, and lessons by company.</p>
         </div>
         {!showForm && (
-          <button className="btn" onClick={() => setShowForm(true)}>
-            + Add experience
-          </button>
+          <div className="form-actions">
+            <button className="btn secondary" onClick={onLoadSamples}>
+              Load sample data
+            </button>
+            <button className="btn" onClick={() => setShowForm(true)}>
+              + Add experience
+            </button>
+          </div>
         )}
       </div>
 
       <div className="stats-grid">
-        <StatCard icon="🗂️" label="Experiences" value={experiences.length} color="#6366f1" />
-        <StatCard icon="🏢" label="Companies" value={companies} color="#0ea5e9" />
-        <StatCard icon="🎉" label="Selected" value={selected} color="#10b981" />
-        <StatCard icon="📉" label="Rejected" value={rejected} color="#ef4444" />
+        <StatCard label="Experiences" value={experiences.length} color="#6366f1" />
+        <StatCard label="Companies" value={companies} color="#0ea5e9" />
+        <StatCard label="Selected" value={selected} color="#10b981" />
+        <StatCard label="Rejected" value={rejected} color="#ef4444" />
       </div>
 
       {showForm && (
@@ -72,7 +77,7 @@ function CompaniesPage({ experiences, onAdd, onDelete }) {
         {visible.length === 0 ? (
           <p className="empty">
             {experiences.length === 0
-              ? 'No experiences yet. Click "Add experience" to log your first one.'
+              ? 'No experiences yet. Add your own, or click "Load sample data" to see how it looks.'
               : 'No experiences match your filters.'}
           </p>
         ) : (
