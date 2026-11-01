@@ -11,11 +11,11 @@ import CompaniesPage from './pages/CompaniesPage'
 import ResourcesPage from './pages/ResourcesPage'
 
 const NAV_ITEMS = [
-  { name: 'Dashboard', icon: '🏠' },
-  { name: 'Tasks', icon: '📝' },
-  { name: 'DSA Tracker', icon: '💻' },
-  { name: 'Companies', icon: '🏢' },
-  { name: 'Resources', icon: '📚' },
+  { name: 'Dashboard', icon: 'home' },
+  { name: 'Tasks', icon: 'tasks' },
+  { name: 'DSA Tracker', icon: 'code' },
+  { name: 'Companies', icon: 'building' },
+  { name: 'Resources', icon: 'book' },
 ]
 
 function App() {

@@ -19,7 +19,7 @@ function DashboardPage({ tasks, completed, percent, streak, minutesLeft, weekDat
 
   return (
     <>
-      <h1 className="page-title">{getGreeting()} 👋</h1>
+      <h1 className="page-title">{getGreeting()}</h1>
       <p className="page-subtitle">{today}</p>
 
       <div className="stats-grid">
